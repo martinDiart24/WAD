@@ -1,0 +1,547 @@
+/* ===== Základ: tmavé téma ===== */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: #0b0f1a;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0b0f1a;
+    background-image: radial-gradient(ellipse 120% 80% at 50% 0%, #1a2332 0%, #0b0f1a 50%);
+    color: #e2e8f0;
+    min-height: 100vh;
+}
+
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+}
+
+/* ===== Header ===== */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    background: rgba(11, 15, 26, 0.85);
+    border-bottom: 1px solid rgba(71, 85, 105, 0.4);
+    color: #f1f5f9;
+}
+
+.topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.topbar h1 a {
+    color: #f1f5f9;
+    text-decoration: none;
+}
+
+.topbar a:hover {
+    color: #cbd5e1;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.brand-logo {
+    font-size: 1.5rem;
+}
+
+.brand-subtitle {
+    margin: 0.2rem 0 0;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.topbar nav a {
+    margin-left: 0.75rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.topbar nav a:hover {
+    border-color: rgba(59, 130, 246, 0.6);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* ===== Stránka + hero ===== */
+.page {
+    flex: 1;
+}
+
+.hero {
+    border-bottom: 1px solid rgba(71, 85, 105, 0.35);
+    padding: 1.5rem 0 1.25rem;
+    text-align: center;
+}
+
+.hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: #e2e8f0;
+}
+
+.hero-inner h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.4rem;
+}
+
+.hero-inner p {
+    margin: 0;
+    max-width: 520px;
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.35rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.hero-cta:hover {
+    filter: brightness(1.1);
+}
+
+/* ===== Hlavní obsah: tmavý blok, středění, sloupce ===== */
+.main-card {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem 2rem;
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    color: #e2e8f0;
+}
+
+.content-centered {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Nadpis sekce – vždy na střed */
+.content-centered .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+}
+
+.content-centered .section-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #f1f5f9;
+}
+
+.content-centered .section-header .muted {
+    margin: 0;
+}
+
+.content-centered .engine-specs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.content-centered .engine-specs .pill {
+    margin: 0;
+}
+
+/* Sloupce pod nadpisem – mřížka karet */
+.content-centered .grid {
+    display: grid;
+    gap: 1rem;
+    margin: 0 auto 1rem;
+    text-align: left;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.content-centered .grid .card {
+    text-align: left;
+}
+
+/* Karty */
+.card {
+    background: rgba(30, 41, 59, 0.95);
+    border-radius: 12px;
+    border: 1px solid rgba(71, 85, 105, 0.6);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    padding: 1rem 1rem 0.5rem;
+}
+
+.card-header h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    color: #f1f5f9;
+}
+
+.card-header h3 a {
+    color: #93c5fd;
+    text-decoration: none;
+}
+
+.card-header h3 a:hover {
+    text-decoration: underline;
+}
+
+.card-body {
+    padding: 0 1rem 1rem;
+}
+
+.model-card .card-header h3 {
+    margin-top: 0.35rem;
+}
+
+.muted {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    margin: 0.25rem 0 0;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+}
+
+.badge-brand {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.6);
+}
+
+.pill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.35rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.pill-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(71, 85, 105, 0.7);
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 0.85rem;
+}
+
+.pill-link:hover {
+    border-color: rgba(59, 130, 246, 0.8);
+    background: rgba(59, 130, 246, 0.15);
+}
+
+.pill-sub {
+    color: #93c5fd;
+}
+
+.pill,
+.engine-specs .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(71, 85, 105, 0.8);
+    font-size: 0.82rem;
+    color: #cbd5e1;
+    background: rgba(15, 23, 42, 0.6);
+}
+
+/* Empty state – na střed */
+.empty-state {
+    text-align: center;
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+    border: 1px dashed rgba(71, 85, 105, 0.7);
+    background: rgba(15, 23, 42, 0.7);
+    margin: 0 auto 1rem;
+    max-width: 480px;
+}
+
+.empty-state h3,
+.empty-state h4 {
+    margin: 0 0 0.5rem;
+    color: #e2e8f0;
+    font-size: 1.1rem;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.empty-state p + p {
+    margin-top: 0.75rem;
+}
+
+.empty-state code {
+    background: rgba(30, 41, 59, 0.9);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #93c5fd;
+}
+
+/* Tabulky – tmavé, zarovnané */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem auto;
+    max-width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(71, 85, 105, 0.6);
+}
+
+.table th,
+.table td {
+    padding: 0.65rem 0.9rem;
+    text-align: left;
+}
+
+.table thead {
+    background: rgba(30, 41, 59, 0.98);
+}
+
+.table thead th {
+    color: #cbd5e1;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table tbody tr:nth-child(even) {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.table tbody td {
+    color: #e2e8f0;
+}
+
+.table a {
+    color: #93c5fd;
+    text-decoration: none;
+}
+
+.table a:hover {
+    text-decoration: underline;
+}
+
+/* Vyhledávací formulář – na střed */
+.search-form {
+    margin: 1rem auto 1.5rem;
+    padding: 1.25rem;
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    max-width: 520px;
+}
+
+.search-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.search-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.search-row input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(71, 85, 105, 0.8);
+    background: rgba(15, 23, 42, 0.9);
+    color: #e2e8f0;
+    font-size: 0.95rem;
+}
+
+.search-row input::placeholder {
+    color: #64748b;
+}
+
+.search-row button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.search-row button:hover {
+    filter: brightness(1.1);
+}
+
+.results-heading {
+    margin: 1.25rem 0 0.75rem;
+    font-size: 1.15rem;
+    color: #f1f5f9;
+}
+
+/* Sekce na stránce – karta s tabulkou/díly na střed */
+.content-centered .card {
+    margin: 0 auto 1rem;
+    max-width: 100%;
+}
+
+.content-centered section.card {
+    text-align: left;
+}
+
+.content-centered section.card .card-header {
+    text-align: center;
+}
+
+.content-centered section.card .card-header h3 {
+    margin: 0 0 0.2rem;
+}
+
+.section-footer {
+    margin-top: 1.25rem;
+    text-align: center;
+}
+
+.back-link {
+    margin: 0 0 1rem;
+    text-align: center;
+}
+
+.back-link .link-button {
+    display: inline-flex;
+}
+
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(59, 130, 246, 0.7);
+    color: #93c5fd;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.link-button:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+/* Footer */
+.footer {
+    background: transparent;
+    color: #64748b;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.footer-pill {
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    color: #94a3b8;
+}
+
+@media (max-width: 720px) {
+    .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-inner {
+        padding: 0 0.5rem;
+    }
+
+    .content-centered .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+        text-align: center;
+    }
+}

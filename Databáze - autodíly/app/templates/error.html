@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ code }} – Chyba{% endblock %}
+
+{% block content %}
+<div class="section-header">
+    <div>
+        <h2>{{ code }} – {{ title }}</h2>
+        <p class="muted">{{ message }}</p>
+    </div>
+</div>
+<div class="empty-state">
+    <p><a href="{{ url_for('main.index') }}" class="link-button">← Zpět na hlavní stránku</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Motor {{ engine.code }} – díly{% endblock %}
+
+{% block content %}
+<p class="back-link"><a href="{{ url_for('main.index') }}" class="link-button">← Zpět na přehled modelů</a></p>
+<div class="section-header">
+    <div>
+        <h2>{{ engine.car_model.manufacturer.name }} {{ engine.car_model.name }}</h2>
+        <p class="muted">Motor <strong>{{ engine.code }}</strong></p>
+    </div>
+    <div class="engine-specs">
+        <span class="pill">{{ engine.fuel_type or "neuvedeno" }}</span>
+        <span class="pill">{{ engine.capacity_l or "?" }} l</span>
+        <span class="pill">{{ engine.power_kw or "?" }} kW</span>
+    </div>
+</div>
+
+<section class="card">
+    <header class="card-header">
+        <h3>Kompatibilní díly</h3>
+        <p class="muted">Seznam dílů přiřazených k tomuto motoru.</p>
+    </header>
+
+    <div class="card-body">
+        {% if not compatibilities %}
+            <div class="empty-state">
+                <h4>Pro tento motor zatím nejsou v databázi žádné díly</h4>
+                <p>Přidejte první díly přes skript nebo administrační rozhraní.</p>
+            </div>
+        {% else %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Název dílu</th>
+                    <th>OEM kód</th>
+                    <th>Kategorie</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for compat in compatibilities %}
+                    <tr>
+                        <td><a href="{{ url_for('main.part_detail', part_id=compat.part.id) }}">{{ compat.part.name }}</a></td>
+                        <td>{{ compat.part.oem_code or "-" }}</td>
+                        <td>{{ compat.part.category.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</section>
+
+<div class="section-footer">
+    <a class="link-button" href="{{ url_for('main.search_parts') }}?q={{ engine.code }}">Vyhledat díly pro tento motor</a>
+</div>
+{% endblock %}

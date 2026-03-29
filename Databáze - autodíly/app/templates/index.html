@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Modely aut{% endblock %}
+
+{% block content %}
+<div class="section-header">
+    <div>
+        <h2>Přehled modelů</h2>
+        <p class="muted">Vyberte model a podívejte se na konkrétní motory a kompatibilní díly.</p>
+    </div>
+</div>
+
+{% if not car_models %}
+    <div class="empty-state">
+        <h3>Žádná data zatím nejsou k dispozici</h3>
+        <p>Spusťte v kořeni projektu: <code>python seed_data.py</code> — naplní databázi ukázkovými modely a motory. Pak obnovte tuto stránku.</p>
+        <p><a href="{{ url_for('main.search_parts') }}" class="link-button">Vyhledat díl</a></p>
+    </div>
+{% else %}
+    <div class="grid grid-2">
+        {% for model in car_models %}
+            <article class="card model-card">
+                <header class="card-header">
+                    <span class="badge badge-brand">{{ model.manufacturer.name }}</span>
+                    <h3>{{ model.name }}</h3>
+                    <p class="muted">
+                        {{ model.year_from }} – {{ model.year_to or "současnost" }}
+                    </p>
+                </header>
+                <section class="card-body">
+                    <h4>Motory</h4>
+                    {% if model.engines %}
+                        <ul class="pill-list">
+                            {% for engine in model.engines %}
+                                <li>
+                                    <a class="pill-link" href="{{ url_for('main.engine_detail', engine_id=engine.id) }}">
+                                        {{ engine.code }}
+                                        {% if engine.power_kw %}<span class="pill-sub">{{ engine.power_kw }} kW</span>{% endif %}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="muted">Žádné motory zatím nejsou zadány.</p>
+                    {% endif %}
+                </section>
+            </article>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

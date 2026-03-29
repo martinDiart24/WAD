@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}{{ part.name }} – nabídky{% endblock %}
+
+{% block content %}
+<p class="back-link"><a href="{{ url_for('main.index') }}" class="link-button">← Zpět na přehled</a></p>
+<div class="section-header">
+    <div>
+        <h2>{{ part.name }}</h2>
+        {% if part.oem_code %}
+            <p class="muted">OEM: {{ part.oem_code }}</p>
+        {% endif %}
+        <p class="muted">Kategorie: {{ part.category.name }}</p>
+    </div>
+    {% if best_price %}
+        <div class="engine-specs">
+            <span class="pill">Nejlepší cena ≈ {{ "%.0f"|format(best_price) }} Kč</span>
+        </div>
+    {% endif %}
+</div>
+
+<section class="card">
+    <header class="card-header">
+        <h3>Nabídky z obchodů</h3>
+        <p class="muted">Ceny a dostupnost z propojených e‑shopů a vrakovišť.</p>
+    </header>
+
+    <div class="card-body">
+        {% if not offers %}
+            <div class="empty-state">
+                <h4>Zatím žádné nabídky</h4>
+                <p>Po napojení API obchodů se zde zobrazí ceny a dostupnost pro tento díl.</p>
+            </div>
+        {% else %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Obchod</th>
+                    <th>Cena</th>
+                    <th>Dostupnost</th>
+                    <th>Odkaz</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for offer in offers %}
+                    <tr>
+                        <td>{{ offer.shop.name }}</td>
+                        <td>
+                            {% if offer.price_czk is not none %}
+                                {{ "%.0f"|format(offer.price_czk) }} Kč
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>{{ offer.availability or "-" }}</td>
+                        <td>
+                            {% if offer.product_url %}
+                                <a href="{{ offer.product_url }}" target="_blank" rel="noopener" class="link-button">Zobrazit</a>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Vyhledat díl{% endblock %}
+
+{% block content %}
+<p class="back-link"><a href="{{ url_for('main.index') }}" class="link-button">← Zpět na přehled</a></p>
+<div class="section-header">
+    <div>
+        <h2>Vyhledávání dílů</h2>
+        <p class="muted">Hledejte podle kódu motoru, OEM kódu nebo názvu dílu.</p>
+    </div>
+</div>
+
+<form method="get" class="search-form">
+    <label for="q">Dotaz</label>
+    <div class="search-row">
+        <input id="q" name="q" value="{{ query }}" placeholder="např. BXE, 03G906021, olejový filtr">
+        <button type="submit">Hledat</button>
+    </div>
+</form>
+
+{% if query %}
+    <h3 class="results-heading">Výsledky pro „{{ query }}“</h3>
+
+    {% if not results %}
+        <div class="empty-state">
+            <h4>Nic nebylo nalezeno</h4>
+            <p>Zkuste zadat jiný kód motoru, OEM nebo upravit klíčová slova.</p>
+        </div>
+    {% else %}
+        <div class="grid grid-2">
+            {% for row in results %}
+                <article class="card">
+                    <header class="card-header">
+                        <h3>
+                            <a href="{{ url_for('main.part_detail', part_id=row.part.id) }}">{{ row.part.name }}</a>
+                        </h3>
+                        {% if row.part.oem_code %}
+                            <p class="muted">OEM: {{ row.part.oem_code }}</p>
+                        {% endif %}
+                    </header>
+                    <div class="card-body">
+                        {% if row.engine %}
+                            <p class="muted">
+                                Motor: {{ row.engine.car_model.manufacturer.name }}
+                                {{ row.engine.car_model.name }}
+                                ({{ row.engine.code }})
+                            </p>
+                        {% else %}
+                            <p class="muted">Motor není přiřazen.</p>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock %}
